@@ -4,3 +4,6 @@ node_modules/
 dist/
 npm-debug.log
 .idea
+README01.md
+.postcssrc-compiled.js
+.postcssrc-compiled.js.map

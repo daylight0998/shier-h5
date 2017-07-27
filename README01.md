@@ -4,20 +4,24 @@
 
 **登录与注销** <br>
 
-
+![Image text](https://github.com/Sukura7/vue-ali-xianyu/blob/master/demoimg/login.gif) <br>
+ 
 **购买闲置**<br>
 
+![Image text](https://github.com/Sukura7/vue-ali-xianyu/blob/master/demoimg/buy.gif) <br>
 
 **发布闲置**<br>
 
+![Image text](https://github.com/Sukura7/vue-ali-xianyu/blob/master/demoimg/fabu.gif) <br>
 
 **搜索功能**<br>
 
+![Image text](https://github.com/Sukura7/vue-ali-xianyu/blob/master/demoimg/search.gif) <br>
 
 ### 在线预览
 _____
-**线上体验**：PC浏览器打开请切换成移动端模式效果更佳<br>
-**源码**： [源码](https://github.com/daylight0998/shier-h5) <br>
+**线上体验**： [demo](https://sukura7.github.io/vue-xianyu-demo/index.html#/) PC浏览器打开请切换成移动端模式效果更佳<br>
+**源码**： [源码](https://github.com/Sukura7/vue-ali-xianyu) <br>
 
 # 技术栈
 * vue 页面显示
@@ -47,10 +51,11 @@ _____
 * **删除订单**<br>
   删除订单对应删除发布，删除之后相应的数量会减少，当然，以上些都基于你已经登录，如果是位登录状态是无法进行操作的。
 * **撩客服**<br>
+  如果你有看[demo](https://sukura7.github.io/vue-xianyu-demo/index.html#/)的话，那么你会注意到这里可以发送消息，而且也可以发送表情。表情的实现是个难点，我是学着GitHub上一位大佬老做的，其实每一个emoji就是一张图片，只是以code的形式展现，通过正则表达式以及数组的切割方法将它以`<img src=""/>`的格式输出。此处实现的确有点难，但是想明白后也就理解了，如果感兴趣的话，可以看[源码](https://github.com/Sukura7/vue-ali-xianyu)。
 * **搜索商品**<br>
   用户输入关键字，通过ajax发送到后台数据，这里利用了字符串的indexOf()方法来判断用户输入的关键字有没有在后台返回的数据里，有的话就输出数据，没有就输出提示。
   ```
-  this.axios.get('https://xxx.com/mock/593f72288ac26d795ff1e570/search/results')
+  this.axios.get('https://easy-mock.com/mock/593f72288ac26d795ff1e570/search/results')
 			.then((res) => {
 				let result = res.data
 				console.log(result)
@@ -73,12 +78,12 @@ _____
   
 # 入过的坑
 * **跨域操作**<br>
-  在实现搜索功能的时候，他告诉我跨域。但是没关系，CORS来应付，我们只需在后端领域里配置一下响应头就行，`header("Access-Control-Allow-Origin：*")` 当然这种方法必须开启cors才能成功。还有另外一种方法就是在config文件夹的index.js
+  在实现搜索功能的时候，我企图调用闲鱼官网的接口来获取数据，但是很不幸，他告诉我跨域。但是没关系，CORS来应付，我们只需在后端领域里配置一下响应头就行，`header("Access-Control-Allow-Origin：*")` 当然这种方法必须开启cors才能成功。还有另外一种方法就是在config文件夹的index.js
   中设置代理来解决跨域问题。形如：
   ```
   proxyTable: {
         '/api': {
-              target: 'https://xxx.com/list/list.htm?q=',
+              target: 'https://s.2.taobao.com/list/list.htm?q=',
               changeOrigin: true,
               pathRewrite: { //需要rewrite重写的, 如果在服务器端做了处理则可以不要这段
                '^/api': ''
@@ -92,6 +97,8 @@ _____
  * **vue组件通信**<br>
   vue由许多的组件组成，那么各组件之间的通信就成了一个问题。vue中组件之间传值有这么几种方式。如果是页面较少，就可以考虑使用props传值，父传子，子传孙，一直传下去···但是，使用Props，会有些麻烦，状态的改变要往回传，页面一多就有些烦人。所以如果你的页面超过了10个以上，就要考虑vuex了，vuex就是专门为vue.js开发的状态管理模式，能够实现组件之间的组件共享。
  # 总结<br>
+   未来不会停止这个项目，会保持更新，逐步细化完善更多功能，如果有帮助可以fork和star,希望聆听你们的建议和更正~<br>
+   ps: 我是一名大三的学生，正在寻求实习机会，请各位看官瞧一瞧望一望[我的简历](https://sukura7.github.io/resume/)
  
  # 使用手则
  ## Build Setup
