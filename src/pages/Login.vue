@@ -71,7 +71,7 @@ export default {
 					Toast('请输入账户名')
 				}else if(this.password == ''){
 					Toast('请输入密码');
-				}else if(this.password.length <= 6){
+				}else if(this.password.length < 6){
 					Toast('密码不能低于6位哟')
 				}else{
 					window.localStorage.setItem('username',this.username)

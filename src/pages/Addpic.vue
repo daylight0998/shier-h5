@@ -187,7 +187,7 @@ import util from '../assets/js/util.js'
         this.hidemask()
         // console.log(price)
      },
-     setSelected () {
+     setSelected (event) {
         if(document.querySelector('.selected'))  {
             document.querySelector('.selected').classList.remove('selected')
           }
