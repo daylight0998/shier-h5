@@ -13,6 +13,7 @@
     "axios": "^0.16.1",
     "babel-plugin-component": "^0.9.1",
     "china-area-data": "^3.0.0",
+    "md5": "^2.2.1",
     "mint-ui": "^2.2.7",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.5",

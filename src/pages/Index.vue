@@ -30,6 +30,11 @@ import IndexRecom from '../components/IndexRecom.vue'
 import IndexAd from '../components/IndexAd.vue'
 import IndexNav from '../components/IndexNav.vue'
 import {mapActions} from 'vuex'
+import API from '../api/API'
+const api = new API();
+import {Toast} from 'mint-ui'
+import { Indicator } from 'mint-ui'
+
 export default {
 	components: {
 		IndexBanner,
@@ -41,6 +46,7 @@ export default {
 	},
 	data () {
 			return {
+                list: [],
 			 	goodslist: [],
 			    typelist: [],
 			    ad: []
@@ -48,15 +54,45 @@ export default {
 	},
 	mounted () {
 		this.$store.dispatch('setCurindex', 0)
-		this.axios.get('https://easy-mock.com/mock/593ebbfe8ac26d795feb44f8/index/goodslist')
-			        .then((response) => {
-			         	this.goodslist = response.data.goodslist
-        				console.log(this.goodslist)
-			      })
-			      .catch(function (error) {
-			        console.log(error) 
-			      })
-		this.axios.get('https://easy-mock.com/mock/593ebbfe8ac26d795feb44f8/index/typelist')
+        this.axios.get(this.axios.defaults.baseURL + '/goodslist')
+                .then((response) => {
+                this.goodslist = response.data.goodslist
+                    console.log(this.goodslist)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+
+        let that = this;
+        //获取信息列表
+//        let param = { "StartYear": "2016", "EndYear": "2016"};
+        let param = {};
+        let response = api.getList('/goodslist',param);
+        response.then(function(res){
+                    if(!JSON.parse(res.data.DataJson).Data){
+                        that.list = [];
+                        Toast({
+                            message: '无数据',
+                            duration: 2000
+                        });
+                    }
+                    let data = JSON.parse(res.data.DataJson).Data.datalist;
+                    Indicator.close();
+                    that.list = data;
+                    console.log(that.list);
+                })
+                .catch(function(err){
+                    console.log(err);
+                    that.list = [];
+                    Indicator.close();
+                    Toast({
+                        message: '无数据',
+                        duration: 2000
+                    });
+                });
+
+
+		this.axios.get(this.axios.defaults.baseURL + '/typelist')
 			        .then((response) => {
 			         	this.typelist = response.data.typelist
         				console.log(this.typelist)
@@ -64,7 +100,7 @@ export default {
 			      .catch(function (error) {
 			        console.log(error) 
 			      })
-		this.axios.get('https://easy-mock.com/mock/593ebbfe8ac26d795feb44f8/index/ad')
+		this.axios.get(this.axios.defaults.baseURL + '/ad')
 			        .then((response) => {
 			         	this.ad = response.data.ad
         				console.log(this.ad)

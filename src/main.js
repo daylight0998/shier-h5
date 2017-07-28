@@ -11,6 +11,9 @@ import RegionPicker from 'vue-region-picker'
 import REGION_DATA from 'china-area-data'
 
 axios.default.timeout = 5000
+axios.defaults.baseURL = 'https://easy-mock.com/mock/593ebbfe8ac26d795feb44f8';
+//axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+//axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 Vue.use(RegionPicker, { //三级联动
   region: REGION_DATA,
