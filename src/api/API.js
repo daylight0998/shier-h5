@@ -27,7 +27,8 @@ class API {
         config.headers.sign = this.getkey(param);
         //console.log(config.headers);
 		//config.data.CustData.Data = param;
-		return axios.get(axios.defaults.baseURL + url,config);
+		//return axios.get(axios.defaults.baseURL + url,config);
+		return axios.get('http://localhost:3000' + url,config);
 	}
 	//getCurrency (url,param) {
 	//	console.log(config);

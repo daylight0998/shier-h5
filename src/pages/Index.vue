@@ -67,16 +67,17 @@ export default {
         //获取信息列表
 //        let param = { "StartYear": "2016", "EndYear": "2016"};
         let param = {};
-        let response = api.getList('/goodslist',param);
+        let response = api.getList('/users',param);
         response.then(function(res){
-                    if(!JSON.parse(res.data.DataJson).Data){
+                    console.log(res.data.data);
+                    if(!res.data.data){
                         that.list = [];
                         Toast({
                             message: '无数据',
                             duration: 2000
                         });
                     }
-                    let data = JSON.parse(res.data.DataJson).Data.datalist;
+                    let data = res.data.data;
                     Indicator.close();
                     that.list = data;
                     console.log(that.list);
